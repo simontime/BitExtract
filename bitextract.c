@@ -33,7 +33,6 @@ typedef struct
     uint32_t hash;
     uint8_t  flag;
 } bitEntry;
-
 #pragma pack(pop)
 
 // type 0: uncompressed, raw data copy
