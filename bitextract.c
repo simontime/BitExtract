@@ -211,10 +211,10 @@ int main(int argc, char **argv)
         {
             perror("Error");
             
-    		free(entries);
-    		fclose(in);
-    		
-    		return 1;
+            free(entries);
+            fclose(in);
+            
+            return 1;
         }
 
         inB = malloc(entries[i].length);
@@ -249,7 +249,7 @@ int main(int argc, char **argv)
     }
 
     free(entries);
-	fclose(in);
+    fclose(in);
 
     puts("\nDone!");
 
