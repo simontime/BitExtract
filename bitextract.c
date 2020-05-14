@@ -174,12 +174,14 @@ int main(int argc, char **argv)
     if (argc != 3)
     {
         printf("Usage: %s input.bit directory\n", argv[0]);
+        
         return 0;
     }
 
     if ((in = fopen(argv[1], "rb")) == NULL)
     {
         perror("Error");
+        
         return 1;
     }
 
@@ -190,6 +192,7 @@ int main(int argc, char **argv)
         fprintf(stderr, "Error: Invalid magic %02x%02x%02x%02x!\n",
             (uint8_t)hdr.magic[0], (uint8_t)hdr.magic[1],
             (uint8_t)hdr.magic[2], (uint8_t)hdr.magic[3]);
+            
         return 1;
     }
 
@@ -207,7 +210,11 @@ int main(int argc, char **argv)
         if ((out = fopen(fn, "wb")) == NULL)
         {
             perror("Error");
-            return 1;
+            
+    		free(entries);
+    		fclose(in);
+    		
+    		return 1;
         }
 
         inB = malloc(entries[i].length);
@@ -217,7 +224,14 @@ int main(int argc, char **argv)
 
         if (*inB > 2)
         {
-            fprintf(stderr, "Error: Unsupported compression format %d\n", *inB);
+            fprintf(stderr, "Error: Unsupported compression format %d\n", *inB); 
+             
+            free(inB);
+            free(entries);
+            
+            fclose(in);
+            fclose(out);
+            
             return 1;
         }
         else
@@ -235,6 +249,7 @@ int main(int argc, char **argv)
     }
 
     free(entries);
+	fclose(in);
 
     puts("\nDone!");
 
