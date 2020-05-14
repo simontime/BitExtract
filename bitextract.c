@@ -110,7 +110,7 @@ int32_t decompressLZRLE(uint8_t *in, uint8_t **out)
     outPtr = *out = malloc(bytesLeft);
 
     // skip past header
-    in += hdr->skip + 10;
+    in += hdr->skip + sizeof(cmpHeader);
 
     do
     {
