@@ -39,8 +39,8 @@ typedef struct
 // type 0: uncompressed, raw data copy
 int32_t decompressCopy(uint8_t *in, uint8_t **out)
 {
-	int32_t length;
-	
+    int32_t length;
+    
     cmpHeader *hdr = (cmpHeader *)in;
 
     length = hdr->length - hdr->skip;
@@ -54,9 +54,9 @@ int32_t decompressCopy(uint8_t *in, uint8_t **out)
 // type 1: RLE compression
 int32_t decompressRLE(uint8_t *in, uint8_t **out)
 {
-	int32_t bytesLeft;
-	uint8_t *outPtr;
-	
+    int32_t bytesLeft;
+    uint8_t *outPtr;
+    
     cmpHeader *hdr = (cmpHeader *)in;
 
     bytesLeft = hdr->length - hdr->skip;
@@ -100,8 +100,8 @@ int32_t decompressRLE(uint8_t *in, uint8_t **out)
 // type 2: A fusion of LZ and RLE, switching modes depending on the bit(s) set in the operation byte
 int32_t decompressLZRLE(uint8_t *in, uint8_t **out)
 {
-	int32_t bytesLeft;
-	uint8_t *outPtr;
+    int32_t bytesLeft;
+    uint8_t *outPtr;
 
     cmpHeader *hdr = (cmpHeader *)in;
 
